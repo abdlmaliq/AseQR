@@ -1,0 +1,6 @@
+{
+  "name": "AseQR",
+  "description": "All-in-one digital profile, custom QR code studio, and scan analytics hub for job fairs, meetups, and conferences. Generate custom QRs for links, text, images, and WiFi, track scan metrics, and share your entire profile seamlessly.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

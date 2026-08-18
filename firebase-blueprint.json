@@ -1,0 +1,103 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Master digital networking profile for an attendee",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Unique auth user ID" },
+        "name": { "type": "string", "description": "Full name of the user" },
+        "headline": { "type": "string", "description": "Professional headline or job title" },
+        "company": { "type": "string", "description": "Current organization or company" },
+        "location": { "type": "string", "description": "City, state or location" },
+        "bio": { "type": "string", "description": "Short personal bio" },
+        "statusBadge": { "type": "string", "description": "Status badge such as hiring or open to roles" },
+        "phone": { "type": "string", "description": "Primary phone number" },
+        "email": { "type": "string", "description": "Primary email address" },
+        "portfolioUrl": { "type": "string", "description": "Portfolio website URL" },
+        "resumeUrl": { "type": "string", "description": "Resume PDF link" },
+        "linkedinUrl": { "type": "string", "description": "LinkedIn profile URL" },
+        "githubUrl": { "type": "string", "description": "GitHub profile URL" },
+        "twitterUrl": { "type": "string", "description": "X / Twitter URL" },
+        "calendlyUrl": { "type": "string", "description": "Meeting booking link" },
+        "pitch": { "type": "string", "description": "Elevator pitch story" },
+        "avatarUrl": { "type": "string", "description": "Profile picture avatar URL" },
+        "customLinks": { "type": "array", "description": "Custom links list" },
+        "updatedAt": { "type": "string", "description": "ISO timestamp of last update" }
+      },
+      "required": ["name", "email"]
+    },
+    "ScannedContact": {
+      "title": "ScannedContact",
+      "description": "Contact or lead captured during networking event",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique contact ID" },
+        "rawText": { "type": "string", "description": "Raw scanned QR text payload" },
+        "type": { "type": "string", "description": "Detected QR type" },
+        "parsedTitle": { "type": "string", "description": "Primary display title" },
+        "parsedSubtitle": { "type": "string", "description": "Company or role subtitle" },
+        "eventTag": { "type": "string", "description": "Event name tag" },
+        "notes": { "type": "string", "description": "Attendee notes or followup reminder" },
+        "scannedAt": { "type": "string", "description": "ISO timestamp when scanned" },
+        "starred": { "type": "boolean", "description": "Whether contact is starred" },
+        "vCardData": { "type": "object", "description": "Parsed vCard fields" }
+      },
+      "required": ["id", "rawText", "scannedAt"]
+    },
+    "ScanEvent": {
+      "title": "ScanEvent",
+      "description": "Analytics event logged when a user scans the profile QR code",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique scan ID" },
+        "userId": { "type": "string", "description": "Profile owner ID" },
+        "scannedAt": { "type": "string", "description": "ISO timestamp of scan" },
+        "deviceType": { "type": "string", "description": "Mobile, Tablet, Desktop" },
+        "os": { "type": "string", "description": "Operating system (iOS, Android, etc.)" },
+        "browser": { "type": "string", "description": "Browser name" },
+        "language": { "type": "string", "description": "Device language" },
+        "timezone": { "type": "string", "description": "Device timezone" },
+        "screenResolution": { "type": "string", "description": "Screen resolution" },
+        "actionsTaken": { "type": "array", "description": "Actions clicked during session" },
+        "lastActiveAt": { "type": "string", "description": "Last activity timestamp" }
+      },
+      "required": ["id", "userId", "scannedAt"]
+    },
+    "CustomQRCode": {
+      "title": "CustomQRCode",
+      "description": "Generated custom QR codes (links, texts, images, wifi, vcard, email, sms) for each user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique QR ID" },
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "title": { "type": "string", "description": "Title or label for the QR code" },
+        "type": { "type": "string", "description": "QR code data type (link, text, image, wifi, etc.)" },
+        "content": { "type": "string", "description": "Encoded raw content string" },
+        "createdAt": { "type": "string", "description": "Creation ISO date" },
+        "updatedAt": { "type": "string", "description": "Last modified ISO date" },
+        "payloadDetails": { "type": "object", "description": "Detailed parsed form values" },
+        "styling": { "type": "object", "description": "Colors, margins, and branding configuration" }
+      },
+      "required": ["id", "title", "type", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/profile/{docId}": {
+      "entity": "UserProfile",
+      "description": "Master profile for user"
+    },
+    "/users/{userId}/contacts/{contactId}": {
+      "entity": "ScannedContact",
+      "description": "Scanned leads for user"
+    },
+    "/users/{userId}/scans/{scanId}": {
+      "entity": "ScanEvent",
+      "description": "QR scan analytics logs for user"
+    },
+    "/users/{userId}/customQRs/{qrId}": {
+      "entity": "CustomQRCode",
+      "description": "Custom generated QR codes for user"
+    }
+  }
+}
