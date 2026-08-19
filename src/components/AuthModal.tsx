@@ -29,6 +29,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { AseQRLogo } from './AseQRLogo';
 
 interface AuthModalProps {
   currentUser: User | null;
@@ -149,9 +150,9 @@ export function AuthModal({ currentUser, onClose, onAuthSuccess }: AuthModalProp
       <div className="bg-neutral-900 border border-neutral-800 rounded-3xl max-w-md w-full p-6 space-y-5 shadow-2xl relative animate-in fade-in zoom-in-95 duration-200">
         {/* Header */}
         <div className="flex items-center justify-between border-b border-neutral-800 pb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
-              <UserIcon className="w-5 h-5" />
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 shadow-lg shadow-indigo-500/25 shrink-0 flex items-center justify-center">
+              <AseQRLogo className="w-10 h-10" />
             </div>
             <div>
               <h2 className="text-base font-bold text-white">

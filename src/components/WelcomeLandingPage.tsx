@@ -35,6 +35,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { AseQRLogo } from './AseQRLogo';
 
 interface WelcomeLandingPageProps {
   onAuthSuccess: (user: User) => void;
@@ -133,11 +134,9 @@ export function WelcomeLandingPage({
       {/* Top Navbar */}
       <header className="sticky top-0 z-30 bg-neutral-900/90 backdrop-blur-md border-b border-neutral-800 px-4 py-3 sm:px-6">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 p-0.5 shadow-lg shadow-indigo-500/20 flex items-center justify-center">
-              <div className="w-full h-full bg-neutral-950 rounded-[10px] flex items-center justify-center">
-                <QrCode className="w-5 h-5 text-indigo-400" />
-              </div>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 shadow-lg shadow-indigo-500/20 shrink-0 flex items-center justify-center">
+              <AseQRLogo className="w-10 h-10" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
@@ -169,8 +168,14 @@ export function WelcomeLandingPage({
       {/* Main Content Container */}
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 py-8 sm:py-12 space-y-12 sm:space-y-16">
         {/* Hero Value Section */}
-        <section className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold">
+        <section className="text-center max-w-3xl mx-auto space-y-5">
+          <div className="flex justify-center">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 shadow-2xl shadow-indigo-500/30 shrink-0 transform hover:scale-105 transition-transform duration-300">
+              <AseQRLogo className="w-full h-full" />
+            </div>
+          </div>
+
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Never Hand Out Paper Cards Again</span>
           </div>
@@ -270,24 +275,29 @@ export function WelcomeLandingPage({
           <div id="auth-section" className="lg:col-span-5">
             <div className="rounded-3xl bg-neutral-900 border border-neutral-800 p-6 sm:p-7 shadow-2xl space-y-5 sticky top-20">
               {/* Header */}
-              <div className="space-y-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-base font-bold text-white">
-                    {authMode === 'signup'
-                      ? 'Create Your Account'
-                      : authMode === 'forgot'
-                      ? 'Reset Password'
-                      : 'Welcome Back'}
-                  </h3>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
-                    <Cloud className="w-3 h-3" /> Firestore Cloud
-                  </span>
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 shadow-lg shadow-indigo-500/20 shrink-0 flex items-center justify-center">
+                  <AseQRLogo className="w-10 h-10" />
                 </div>
-                <p className="text-xs text-neutral-400">
-                  {authMode === 'signup'
-                    ? 'Save your profile, lockscreens, and leads in the database'
-                    : 'Sign in to access your saved profile and contacts'}
-                </p>
+                <div className="flex-1 space-y-1">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-base font-bold text-white">
+                      {authMode === 'signup'
+                        ? 'Create Your Account'
+                        : authMode === 'forgot'
+                        ? 'Reset Password'
+                        : 'Welcome Back'}
+                    </h3>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center gap-1">
+                      <Cloud className="w-3 h-3" /> Firestore Cloud
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-400">
+                    {authMode === 'signup'
+                      ? 'Save your profile, lockscreens, and leads in the database'
+                      : 'Sign in to access your saved profile and contacts'}
+                  </p>
+                </div>
               </div>
 
               {/* Tabs for Sign In vs Sign Up */}

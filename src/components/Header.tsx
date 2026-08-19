@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { type User } from '../lib/firebase';
 import { ThemeToggle } from './ThemeToggle';
+import { AseQRLogo } from './AseQRLogo';
 
 interface HeaderProps {
   currentUser: User | null;
@@ -83,22 +84,20 @@ export function Header({
         
         {/* Brand Logo & Title */}
         <div className="flex items-center gap-2.5 text-left">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 p-0.5 shadow-lg shadow-indigo-500/20 flex items-center justify-center shrink-0">
-            <div className="w-full h-full bg-white dark:bg-neutral-950 rounded-[10px] flex items-center justify-center">
-              <QrCode className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
-            </div>
+          <div className="w-10 h-10 shadow-lg shadow-indigo-500/25 shrink-0 group flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
+            <AseQRLogo className="w-10 h-10" />
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <h1 className="text-sm sm:text-base font-bold text-neutral-900 dark:text-white tracking-tight leading-none">
+              <h1 className="text-base sm:text-lg font-black text-neutral-900 dark:text-white tracking-tight leading-none">
                 AseQR
               </h1>
-              <span className="inline-flex items-center px-1.5 py-0.2 rounded text-[10px] font-semibold bg-indigo-50 text-indigo-700 dark:bg-indigo-500/15 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25">
+              <span className="inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-bold bg-indigo-50 text-indigo-700 dark:bg-indigo-500/15 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25 tracking-wide">
                 <Cloud className="w-2.5 h-2.5 mr-1 text-indigo-500 dark:text-indigo-400" />
                 Cloud
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] text-neutral-500 dark:text-neutral-400 tracking-normal mt-0.5 hidden xs:block">
+            <p className="text-[10px] sm:text-[11px] font-medium text-neutral-500 dark:text-neutral-400 tracking-normal mt-0.5 hidden xs:block">
               All-in-One Digital Profile & QR Suite
             </p>
           </div>
