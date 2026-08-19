@@ -246,10 +246,10 @@ export function MasterQRHero({
                     id="hero-scan-insights-badge"
                     onClick={onOpenAnalytics}
                     className="flex items-center gap-1.5 bg-neutral-950/80 hover:bg-neutral-800 px-2.5 py-1 rounded-lg border border-indigo-500/30 text-indigo-300 hover:text-white font-semibold transition-colors active:scale-95 shadow-sm"
-                    title="View QR Scan Telemetry and Real-time Analytics"
+                    title="View QR Scan Telemetry and 90-Day Analytics"
                   >
                     <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>{scansCount} {scansCount === 1 ? 'Scan' : 'Scans'} Tracked</span>
+                    <span>{scansCount} {scansCount === 1 ? 'Scan' : 'Scans'} (90-Day)</span>
                   </button>
                 )}
               </div>

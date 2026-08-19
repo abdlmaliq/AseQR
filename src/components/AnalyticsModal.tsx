@@ -38,7 +38,7 @@ export function AnalyticsModal({
   onClearAllScans,
   userName 
 }: AnalyticsModalProps) {
-  const [filterRange, setFilterRange] = useState<'all' | '24h' | '7d' | '30d'>('all');
+  const [filterRange, setFilterRange] = useState<'all' | '24h' | '7d' | '30d' | '90d'>('all');
   const [filterAction, setFilterAction] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [confirmClear, setConfirmClear] = useState(false);
@@ -56,6 +56,9 @@ export function AnalyticsModal({
       }
       if (filterRange === '30d') {
         return now - scanTime <= 30 * 24 * 60 * 60 * 1000;
+      }
+      if (filterRange === '90d') {
+        return now - scanTime <= 90 * 24 * 60 * 60 * 1000;
       }
       return true;
     });
@@ -339,8 +342,8 @@ export function AnalyticsModal({
               <Calendar className="w-3.5 h-3.5 text-indigo-400" />
               <span>Timeframe:</span>
             </div>
-            <div className="flex items-center gap-1">
-              {(['all', '24h', '7d', '30d'] as const).map((r) => (
+            <div className="flex items-center gap-1 flex-wrap">
+              {(['90d', '30d', '7d', '24h', 'all'] as const).map((r) => (
                 <button
                   key={r}
                   onClick={() => setFilterRange(r)}
@@ -350,7 +353,7 @@ export function AnalyticsModal({
                       : 'text-neutral-400 hover:text-white hover:bg-neutral-800'
                   }`}
                 >
-                  {r === 'all' ? 'All Time' : r === '24h' ? 'Last 24h' : r === '7d' ? 'Last 7 Days' : 'Last 30 Days'}
+                  {r === '90d' ? '90 Days (Active)' : r === 'all' ? 'All Time' : r === '24h' ? 'Last 24h' : r === '7d' ? 'Last 7 Days' : 'Last 30 Days'}
                 </button>
               ))}
             </div>

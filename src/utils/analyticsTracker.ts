@@ -2,11 +2,30 @@ import { ScanEvent } from '../types';
 import { saveCloudScan, logScanActionCloud } from '../lib/firebase';
 
 const LOCAL_SCANS_KEY = 'smart_networking_scans_v1';
+export const SCAN_RETENTION_DAYS = 90;
+export const SCAN_RETENTION_MS = SCAN_RETENTION_DAYS * 24 * 60 * 60 * 1000;
+
+/**
+ * Filters out scan events older than the 90-day retention window
+ */
+export function filter90DayScans(scans: ScanEvent[]): ScanEvent[] {
+  const cutoffTime = Date.now() - SCAN_RETENTION_MS;
+  return (scans || []).filter((scan) => {
+    try {
+      const scanTimestamp = new Date(scan.scannedAt).getTime();
+      return !isNaN(scanTimestamp) && scanTimestamp >= cutoffTime;
+    } catch {
+      return true;
+    }
+  });
+}
 
 export function getLocalScans(): ScanEvent[] {
   try {
     const raw = localStorage.getItem(LOCAL_SCANS_KEY);
-    return raw ? JSON.parse(raw) : [];
+    if (!raw) return [];
+    const parsed: ScanEvent[] = JSON.parse(raw);
+    return filter90DayScans(parsed);
   } catch {
     return [];
   }
@@ -14,7 +33,8 @@ export function getLocalScans(): ScanEvent[] {
 
 export function saveLocalScans(scans: ScanEvent[]): void {
   try {
-    localStorage.setItem(LOCAL_SCANS_KEY, JSON.stringify(scans));
+    const pruned = filter90DayScans(scans);
+    localStorage.setItem(LOCAL_SCANS_KEY, JSON.stringify(pruned));
   } catch {
     // ignore
   }
